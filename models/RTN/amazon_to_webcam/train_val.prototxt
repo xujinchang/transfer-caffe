@@ -598,10 +598,10 @@ layer {
   include: { phase: TRAIN }
 }
 layer {
-  name: "entropy_scaler"
+  name: "entropy_grl"
   type: "GradientScaler"
   bottom: "target_softmax"
-  top: "entropy_scaler"
+  top: "entropy_grl"
   gradient_scaler_param {
     lower_bound: 0.0
     upper_bound: 1.0
@@ -613,7 +613,7 @@ layer {
 layer {
   name: "entropy_loss"
   type: "EntropyLoss"
-  bottom: "entropy_scaler"
+  bottom: "entropy_grl"
   bottom: "target_label"
   top: "entropy_loss"
   loss_weight: -0.1
@@ -680,9 +680,49 @@ layer {
   include: { phase: TRAIN }
 }
 layer {
+  name: "reshape_before"
+  type: "Reshape"
+  bottom: "concat_reshape"
+  top: "reshape_before"
+  reshape_param {
+    shape {
+      dim: 0 
+      dim: 1
+      dim: 128
+      dim: -1
+    }
+  }
+  include: { phase: TRAIN }
+}
+layer {
+  name: "pool"
+  type: "Pooling"
+  bottom: "reshape_before"
+  top: "pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+  include: { phase: TRAIN }
+}
+layer {
+  name: "reshape_after"
+  type: "Reshape"
+  bottom: "pool"
+  top: "reduced_concat_reshape"
+  reshape_param {
+    shape {
+      dim: 64
+      dim: -1
+    }
+  }
+  include: { phase: TRAIN }
+}
+layer {
   name: "slice outproduct"
   type: "Slice"
-  bottom: "concat_reshape"
+  bottom: "reduced_concat_reshape"
   top: "source_transform_reshape"
   top: "target_transform_reshape"
   slice_param {
