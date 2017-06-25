@@ -5,7 +5,7 @@ layer {
   top: "source_data"
   top: "source_label"
   image_data_param {
-    source: ".data/office/amazon_list.txt"
+    source: "./data/office/amazon_list.txt"
     batch_size: 64
     new_height: 256
     new_width: 256
@@ -592,7 +592,6 @@ layer {
   top: "source_softmax"
   include: { phase: TRAIN }
 }
-
 layer {
   name: "concat_fc7"
   type: "Concat"
@@ -604,49 +603,50 @@ layer {
   }
   include: { phase: TRAIN }
 }
-layer {
-  name: "fc7_grl"
-  type: "GradientScaler"
-  bottom: "fc7_grl"
-  top: "fc7_reverse"
-  gradient_scaler_param {
-    lower_bound: 0.0
-    upper_bound: 1.0
-    alpha: 10.0
-    max_iter: 1
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "fc7_adversarial"
-  type: "InnerProduct"
-  bottom: "fc7_reverse"
-  top: "fc7_transform"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
-  inner_product_param {
-    num_output: 4096
-    weight_filler {
-      type: "identity"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }  
-  include: { phase: TRAIN }
-}
+# ========== adversarial ========== #
+#layer {
+#  name: "fc7_grl"
+#  type: "GradientScaler"
+#  bottom: "fc7_grl"
+#  top: "fc7_reverse"
+#  gradient_scaler_param {
+#    lower_bound: 0.0
+#    upper_bound: 1.0
+#    alpha: 10.0
+#    max_iter: 1
+#  }
+#  include: { phase: TRAIN }
+#}
+#layer {
+#  name: "fc7_adversarial"
+#  type: "InnerProduct"
+#  bottom: "fc7_reverse"
+#  top: "fc7_transform"
+#  param {
+#    lr_mult: 1
+#    decay_mult: 1
+#  }
+#  param {
+#    lr_mult: 2
+#    decay_mult: 0
+#  }
+#  inner_product_param {
+#    num_output: 4096
+#    weight_filler {
+#      type: "identity"
+#      std: 0.01
+#    }
+#    bias_filler {
+#      type: "constant"
+#      value: 0
+#    }
+#  }  
+#  include: { phase: TRAIN }
+#}
 layer {
   name: "fc7_slice"
   type: "Slice"
-  bottom: "fc7_transform"
+  bottom: "fc7_grl"
   top: "source_fc7_1"
   top: "target_fc7_1"
   slice_param {
