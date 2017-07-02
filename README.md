@@ -3,6 +3,7 @@
 This is a caffe repository for transfer learning. We fork the repository with version ID `29cdee7` from [Caffe](https://github.com/BVLC/caffe) and make our modifications. The main modifications are listed as follow:
 
 - Add `mmd layer` described in paper "Learning Transferable Features with Deep Adaptation Networks".
+- Add `jmmd layer` described in paper "Deep Transfer Learning with Joint Adaptation Networks".
 - Add `entropy layer` and `outerproduct layer` described in paper "Unsupervised Domain Adaptation with Residual Transfer Networks".
 - Copy `grl layer` and `messenger.hpp` from repository [Caffe](https://github.com/ddtm/caffe/tree/grl).
 - Emit `SOLVER_ITER_CHANGE` message in `solver.cpp` when `iter_` changes.
@@ -60,4 +61,11 @@ Citation
       timestamp = {Fri, 16 Dec 2016 19:45:58 +0100},
       biburl    = {http://dblp.uni-trier.de/rec/bib/conf/nips/LongZ0J16},
       bibsource = {dblp computer science bibliography, http://dblp.org}
+    }
+
+    @article{long2017domain,
+      title={Domain Adaptation with Randomized Multilinear Adversarial Networks},
+      author={Long, Mingsheng and Cao, Zhangjie and Wang, Jianmin and Jordan, Michael I},
+      journal={arXiv preprint arXiv:1705.10667},
+      year={2017}
     }
