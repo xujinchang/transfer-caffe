@@ -24,7 +24,7 @@ The [bvlc\_reference\_caffenet](http://dl.caffe.berkeleyvision.org/bvlc_referenc
 
 Parameter Tuning
 ---------------
-In mmd-layer, parameter `loss_weight` can be tuned to give mmd loss different weights.
+In mmd-layer and jmmd-layer, parameter `loss_weight` can be tuned to give mmd loss different weights.
 
 Citation
 ---------------
