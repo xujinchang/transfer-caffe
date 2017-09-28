@@ -1,4 +1,4 @@
-net: "models/JAN/resnet/train_val.prototxt"
+net: "models/JAN/resnet/JAN_SE50.prototxt"
 test_iter: 795
 test_interval: 300
 base_lr: 0.0003
