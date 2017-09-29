@@ -1,87 +1,17 @@
-# Enter your network definition here.
-# Use Shift+Enter to update the visualization.
-name: "SE-ResNet-50"
+name: "SE-ResNeXt-50 (32 x 4d)"
 # mean_value: 104, 117, 123
-
-layer {
-  name: "source_data"
-  type: "ImageData"
-  top: "source_data"
-  top: "source_label"
-  image_data_param {
-    source: "./data/VisDA2017/train.txt"
-    batch_size: 8
-    new_height: 224
-    new_width: 224
-    shuffle: true
-  }
-  transform_param {
-    crop_size: 224
-    mirror: true
-    mean_value: 104
-    mean_value: 117
-    mean_value: 123
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "target_data"
-  type: "ImageData"
-  top: "target_data"
-  top: "target_label"
-  image_data_param {
-    source: "./data/VisDA2017/test_online.txt"
-    batch_size: 8
-    new_height: 224
-    new_width: 224
-    shuffle: true
-  }
-  transform_param {
-    crop_size: 224
-    mirror: true
-    mean_value: 104
-    mean_value: 117
-    mean_value: 123
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "target_label_silence"
-  type: "Silence"
-  bottom: "target_label"
-  include: { phase: TRAIN }
-}
-layer {
-  name: "test_data"
-  type: "ImageData"
-  top: "data"
-  top: "label"
-  image_data_param {
-    source: "./data/VisDA2017/test_online.txt"
-    batch_size: 1
-    new_height: 224
-    new_width: 224
-    shuffle: false
-  }
-  transform_param {
-    crop_size: 224
-    mirror: false
-    mean_value: 104
-    mean_value: 117
-    mean_value: 123
-  }
-  include: { phase: TEST }
-}
-layer {
+layer { 
   name: "data"
-  type: "Concat"
-  bottom: "source_data"
-  bottom: "target_data"
+  type: "Input"
   top: "data"
-  concat_param: {
-    axis: 0
+  input_param: {
+    shape: {
+      dim: 1 
+      dim: 3 
+      dim: 224 
+      dim: 224
+    }
   }
-  include: { phase: TRAIN }
 }
 layer {
   name: "conv1/7x7_s2"
@@ -140,13 +70,13 @@ layer {
   bottom: "pool1/3x3_s2"
   top: "conv2_1_1x1_reduce"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -179,15 +109,16 @@ layer {
   bottom: "conv2_1_1x1_reduce"
   top: "conv2_1_3x3"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_1_3x3/bn"
@@ -224,9 +155,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_1_1x1_increase/bn"
@@ -267,9 +198,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_1_1x1_down/relu"
@@ -287,9 +218,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_1_prob"
@@ -308,9 +239,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_1_1x1_proj/bn"
@@ -350,14 +281,14 @@ layer {
   bottom: "conv2_1"
   top: "conv2_2_1x1_reduce"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_2_1x1_reduce/bn"
@@ -389,15 +320,16 @@ layer {
   bottom: "conv2_2_1x1_reduce"
   top: "conv2_2_3x3"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_2_3x3/bn"
@@ -434,9 +366,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_2_1x1_increase/bn"
@@ -477,9 +409,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_2_1x1_down/relu"
@@ -497,9 +429,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_2_prob"
@@ -527,14 +459,14 @@ layer {
   bottom: "conv2_2"
   top: "conv2_3_1x1_reduce"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_3_1x1_reduce/bn"
@@ -566,15 +498,16 @@ layer {
   bottom: "conv2_3_1x1_reduce"
   top: "conv2_3_3x3"
   convolution_param {
-    num_output: 64
+    num_output: 128
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_3_3x3/bn"
@@ -611,9 +544,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_3_1x1_increase/bn"
@@ -654,9 +587,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_3_1x1_down/relu"
@@ -674,9 +607,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  param {
-        lr_mult: 0 
-    }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv2_3_prob"
@@ -704,10 +637,13 @@ layer {
   bottom: "conv2_3"
   top: "conv3_1_1x1_reduce"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     kernel_size: 1
-    stride: 2
+    stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -740,11 +676,15 @@ layer {
   bottom: "conv3_1_1x1_reduce"
   top: "conv3_1_3x3"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     pad: 1
     kernel_size: 3
-    stride: 1
+    group: 32
+    stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -781,6 +721,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -822,6 +765,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv3_1_1x1_down/relu"
@@ -838,6 +784,9 @@ layer {
     num_output: 512
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -856,6 +805,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -896,10 +848,13 @@ layer {
   bottom: "conv3_1"
   top: "conv3_2_1x1_reduce"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -932,11 +887,15 @@ layer {
   bottom: "conv3_2_1x1_reduce"
   top: "conv3_2_3x3"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -973,6 +932,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1014,6 +976,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv3_2_1x1_down/relu"
@@ -1030,6 +995,9 @@ layer {
     num_output: 512
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1058,10 +1026,13 @@ layer {
   bottom: "conv3_2"
   top: "conv3_3_1x1_reduce"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1094,11 +1065,15 @@ layer {
   bottom: "conv3_3_1x1_reduce"
   top: "conv3_3_3x3"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1135,6 +1110,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1176,6 +1154,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv3_3_1x1_down/relu"
@@ -1192,6 +1173,9 @@ layer {
     num_output: 512
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1220,10 +1204,13 @@ layer {
   bottom: "conv3_3"
   top: "conv3_4_1x1_reduce"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1256,11 +1243,15 @@ layer {
   bottom: "conv3_4_1x1_reduce"
   top: "conv3_4_3x3"
   convolution_param {
-    num_output: 128
+    num_output: 256
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1297,6 +1288,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1338,6 +1332,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv3_4_1x1_down/relu"
@@ -1354,6 +1351,9 @@ layer {
     num_output: 512
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1382,10 +1382,13 @@ layer {
   bottom: "conv3_4"
   top: "conv4_1_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
-    stride: 2
+    stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1418,11 +1421,15 @@ layer {
   bottom: "conv4_1_1x1_reduce"
   top: "conv4_1_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
-    stride: 1
+    group: 32
+    stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1459,6 +1466,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1500,6 +1510,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_1_1x1_down/relu"
@@ -1516,6 +1529,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1534,6 +1550,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1574,10 +1593,13 @@ layer {
   bottom: "conv4_1"
   top: "conv4_2_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1610,11 +1632,15 @@ layer {
   bottom: "conv4_2_1x1_reduce"
   top: "conv4_2_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1651,6 +1677,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1692,6 +1721,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_2_1x1_down/relu"
@@ -1708,6 +1740,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1736,10 +1771,13 @@ layer {
   bottom: "conv4_2"
   top: "conv4_3_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1772,11 +1810,15 @@ layer {
   bottom: "conv4_3_1x1_reduce"
   top: "conv4_3_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1813,6 +1855,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1854,6 +1899,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_3_1x1_down/relu"
@@ -1870,6 +1918,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1898,10 +1949,13 @@ layer {
   bottom: "conv4_3"
   top: "conv4_4_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1934,11 +1988,15 @@ layer {
   bottom: "conv4_4_1x1_reduce"
   top: "conv4_4_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -1975,6 +2033,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2016,6 +2077,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_4_1x1_down/relu"
@@ -2032,6 +2096,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2060,10 +2127,13 @@ layer {
   bottom: "conv4_4"
   top: "conv4_5_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2096,11 +2166,15 @@ layer {
   bottom: "conv4_5_1x1_reduce"
   top: "conv4_5_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2137,6 +2211,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2178,6 +2255,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_5_1x1_down/relu"
@@ -2194,6 +2274,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2222,10 +2305,13 @@ layer {
   bottom: "conv4_5"
   top: "conv4_6_1x1_reduce"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2258,11 +2344,15 @@ layer {
   bottom: "conv4_6_1x1_reduce"
   top: "conv4_6_3x3"
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2299,6 +2389,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2340,6 +2433,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv4_6_1x1_down/relu"
@@ -2356,6 +2452,9 @@ layer {
     num_output: 1024
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2384,10 +2483,13 @@ layer {
   bottom: "conv4_6"
   top: "conv5_1_1x1_reduce"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     kernel_size: 1
-    stride: 2
+    stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2420,11 +2522,15 @@ layer {
   bottom: "conv5_1_1x1_reduce"
   top: "conv5_1_3x3"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     pad: 1
     kernel_size: 3
-    stride: 1
+    group: 32
+    stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2461,6 +2567,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2502,6 +2611,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_1_1x1_down/relu"
@@ -2518,6 +2630,9 @@ layer {
     num_output: 2048
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2536,6 +2651,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 2
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2576,10 +2694,13 @@ layer {
   bottom: "conv5_1"
   top: "conv5_2_1x1_reduce"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2612,13 +2733,16 @@ layer {
   bottom: "conv5_2_1x1_reduce"
   top: "conv5_2_3x3"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
   }
-
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_2_3x3/bn"
@@ -2654,6 +2778,9 @@ layer {
     bias_term: false
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2695,6 +2822,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_2_1x1_down/relu"
@@ -2712,7 +2842,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_2_prob"
@@ -2740,12 +2872,14 @@ layer {
   bottom: "conv5_2"
   top: "conv5_3_1x1_reduce"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     kernel_size: 1
     stride: 1
   }
-
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_3_1x1_reduce/bn"
@@ -2777,13 +2911,16 @@ layer {
   bottom: "conv5_3_1x1_reduce"
   top: "conv5_3_3x3"
   convolution_param {
-    num_output: 512
+    num_output: 1024
     bias_term: false
     pad: 1
     kernel_size: 3
+    group: 32
     stride: 1
   }
-
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_3_3x3/bn"
@@ -2820,7 +2957,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
- 
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_3_1x1_increase/bn"
@@ -2861,7 +3000,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  
+  param { 
+      lr_mult: 0
+  }
 }
 layer {
   name: "conv5_3_1x1_down/relu"
@@ -2878,6 +3019,9 @@ layer {
     num_output: 2048
     kernel_size: 1
     stride: 1
+  }
+  param { 
+      lr_mult: 0
   }
 }
 layer {
@@ -2911,21 +3055,20 @@ layer {
     stride: 1
   }
 }
-
 layer {
-	bottom: "pool5/7x7_s1"
-	top: "bottleneck"
-	name: "bottleneck"
-	type: "InnerProduct"
+  bottom: "pool5/7x7_s1"
+  top: "bottleneck"
+  name: "bottleneck"
+  type: "InnerProduct"
     param {
-      lr_mult: 1
+      lr_mult: 10
       decay_mult: 1
     }
     param {
-      lr_mult: 2
+      lr_mult: 20
       decay_mult: 0
     }
-	inner_product_param {
+  inner_product_param {
       weight_filler{
         type: "gaussian"
         std: 0.005
@@ -2934,8 +3077,8 @@ layer {
         type: "constant"
         value: 0.1
       }
-	  num_output: 256
-	}
+    num_output: 256
+  }
 }
 
 layer {
@@ -2966,94 +3109,10 @@ layer {
     }
   }
 }
-layer {
-  name: "slice_fc8"
-  type: "Slice"
-  bottom: "fc8"
-  top: "fc8_source"
-  top: "fc8_target"
-  slice_param {
-    axis: 0
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "silence_fc8_target"
-  type: "Silence"
-  bottom: "fc8_target"
-  include: { phase: TRAIN }
-}
-layer {
-  name: "softmax_loss"
-  type: "SoftmaxWithLoss"
-  bottom: "fc8_source"
-  bottom: "source_label"
-  top: "softmax_loss"
-  include: { phase: TRAIN }
-}
-layer {
-  name: "accuracy"
-  type: "Accuracy"
-  bottom: "fc8"
-  bottom: "label"
-  top: "accuracy"
-  include: { phase: TEST }
-}
+
 layer {
   name: "softmax_fc8"
   type: "Softmax"
   bottom: "fc8"
-  top: "softmax1"
-  include: { phase: TRAIN }
+  top: "prob"
 }
-layer {
-  name: "slice_softmax"
-  type: "Slice"
-  bottom: "softmax1"
-  top: "softmax_source"
-  top: "softmax_target"
-  slice_param {
-    axis: 0
-  }
-  include: { phase: TRAIN }
-}
-
-
-layer {
-  name: "fc7_slice"
-  type: "Slice"
-  bottom: "bottleneck"
-  top: "source_fc7_1"
-  top: "target_fc7_1"
-  slice_param {
-    axis: 0
-  }
-  include: { phase: TRAIN }
-}
-layer {
-  name: "fc8_mmd_loss"
-  type: "JMMDLoss"
-  bottom: "source_fc7_1"
-  bottom: "target_fc7_1"
-  bottom: "softmax_source"
-  bottom: "softmax_target"
-  bottom: "source_label"
-  #bottom: "fc6"
-  #bottom: "fc6_target"
-  loss_weight: 0.3 #best 0.3
-  top: "fc7_mmd_loss"
-  loss_weight: 0.3 #best 0.3
-  top: "label_mmd_loss"
-  jmmd_param {
-    kernel_num: 5
-    kernel_mul: 2.0
-    label_kernel_num: 1
-    label_kernel_mul: 2.0
-    fix_gamma: false
-    sigma: 1.3 #best
-    auto_sigma: false
-    label_kernel_mode: PROB_RBF
-    label_back_propagate: true
-  }
-  include: { phase: TRAIN }
-  }

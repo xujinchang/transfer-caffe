@@ -709,6 +709,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_1x1_reduce/bn"
@@ -746,6 +749,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_3x3/bn"
@@ -782,6 +788,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_1x1_increase/bn"
@@ -822,6 +831,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_1x1_down/relu"
@@ -839,6 +851,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_prob"
@@ -857,6 +872,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_1_1x1_proj/bn"
@@ -901,6 +919,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_2_1x1_reduce/bn"
@@ -938,6 +959,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_2_3x3/bn"
@@ -974,6 +998,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_2_1x1_increase/bn"
@@ -1014,6 +1041,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_2_1x1_down/relu"
@@ -1031,6 +1061,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_2_prob"
@@ -1063,6 +1096,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_3_1x1_reduce/bn"
@@ -1100,6 +1136,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_3_3x3/bn"
@@ -1136,6 +1175,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_3_1x1_increase/bn"
@@ -1176,6 +1218,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_3_1x1_down/relu"
@@ -1193,6 +1238,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_3_prob"
@@ -1225,6 +1273,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_4_1x1_reduce/bn"
@@ -1262,6 +1313,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_4_3x3/bn"
@@ -1298,6 +1352,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_4_1x1_increase/bn"
@@ -1338,6 +1395,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_4_1x1_down/relu"
@@ -1355,6 +1415,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv3_4_prob"
@@ -1387,6 +1450,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_1x1_reduce/bn"
@@ -1424,6 +1490,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_3x3/bn"
@@ -1460,6 +1529,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_1x1_increase/bn"
@@ -1500,6 +1572,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_1x1_down/relu"
@@ -1517,6 +1592,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_prob"
@@ -1535,6 +1613,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_1_1x1_proj/bn"
@@ -1579,6 +1660,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_2_1x1_reduce/bn"
@@ -1616,6 +1700,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_2_3x3/bn"
@@ -1652,6 +1739,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_2_1x1_increase/bn"
@@ -1692,6 +1782,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_2_1x1_down/relu"
@@ -1709,6 +1802,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_2_prob"
@@ -1741,6 +1837,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_3_1x1_reduce/bn"
@@ -1778,6 +1877,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_3_3x3/bn"
@@ -1814,6 +1916,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_3_1x1_increase/bn"
@@ -1854,6 +1959,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_3_1x1_down/relu"
@@ -1871,6 +1979,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_3_prob"
@@ -1903,6 +2014,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_4_1x1_reduce/bn"
@@ -1940,6 +2054,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_4_3x3/bn"
@@ -1976,6 +2093,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_4_1x1_increase/bn"
@@ -2016,6 +2136,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_4_1x1_down/relu"
@@ -2033,6 +2156,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_4_prob"
@@ -2065,6 +2191,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_5_1x1_reduce/bn"
@@ -2102,6 +2231,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_5_3x3/bn"
@@ -2138,6 +2270,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_5_1x1_increase/bn"
@@ -2178,6 +2313,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_5_1x1_down/relu"
@@ -2195,6 +2333,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_5_prob"
@@ -2227,6 +2368,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_6_1x1_reduce/bn"
@@ -2264,6 +2408,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_6_3x3/bn"
@@ -2300,6 +2447,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_6_1x1_increase/bn"
@@ -2340,6 +2490,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_6_1x1_down/relu"
@@ -2357,6 +2510,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv4_6_prob"
@@ -2389,6 +2545,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_1x1_reduce/bn"
@@ -2426,6 +2585,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_3x3/bn"
@@ -2462,6 +2624,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_1x1_increase/bn"
@@ -2502,6 +2667,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_1x1_down/relu"
@@ -2519,6 +2687,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_prob"
@@ -2537,6 +2708,9 @@ layer {
     kernel_size: 1
     stride: 2
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_1_1x1_proj/bn"
@@ -2581,6 +2755,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_2_1x1_reduce/bn"
@@ -2618,7 +2795,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
-
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_2_3x3/bn"
@@ -2655,6 +2834,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_2_1x1_increase/bn"
@@ -2695,6 +2877,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_2_1x1_down/relu"
@@ -2712,7 +2897,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_2_prob"
@@ -2745,7 +2932,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_3_1x1_reduce/bn"
@@ -2783,7 +2972,9 @@ layer {
     kernel_size: 3
     stride: 1
   }
-
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_3_3x3/bn"
@@ -2820,7 +3011,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
- 
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_3_1x1_increase/bn"
@@ -2861,7 +3054,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
-  
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_3_1x1_down/relu"
@@ -2879,6 +3074,9 @@ layer {
     kernel_size: 1
     stride: 1
   }
+  param {
+        lr_mult: 0 
+    }
 }
 layer {
   name: "conv5_3_prob"
@@ -2918,11 +3116,11 @@ layer {
 	name: "bottleneck"
 	type: "InnerProduct"
     param {
-      lr_mult: 1
+      lr_mult: 10
       decay_mult: 1
     }
     param {
-      lr_mult: 2
+      lr_mult: 20
       decay_mult: 0
     }
 	inner_product_param {
