@@ -1,4 +1,13 @@
-# taskcv-2017-public
+# VisDA2017 Challenge classification rank 3rd
+# Method
+
+As for the Classification Challenge task, we use the transfer learning method  based on the two paper "Learning Transferable Features with Deep Adaptation Networks" and "Deep Transfer Learning with Joint Adaptation Networks".
+We find the JMMD loss perform better than the MMD loss with deep networks such as resnet50,resnet101. So, in the test stage, inception_resnet_v2,inception v4,senet_resnext50,senet_resnext101 and senet_resnext151 are chosen as our base networks while the loss function is SoftMaxloss and JMMD loss. The training data is only the source dataset The SoftMaxloss is just for the training data and the JMMD loss is used for fitting the training data distribution and test data distribution. 
+
+Finally, we trained 5 models (inception_resnet_v2 inception v4 senet_resnext50 senet_resnext101 senet_resnext151) pretrained by imagenet classification and finetuned the last fc layer in the training set of the task-cv, avoiding overfitting with data augmentation. The top 1 accuracy of each model is: inception_resnet_v2 0.822478991597 inception v4 0.828781512605 senet_resnext50 0.835084033613 senet_resnext101 0.803571428571 senet_resnext151 0.797268907563 Then we merge the
+probability of all the 5 models with differenet weights(1.5 2 2.5 0.8 0.8) to get this final results in the testing set. We also compare with no adaptation, we train the senet_resenet50 network with source dataset, and predict on the test data, the accuracy is just 63.2, much lower than using transfer learning method. 
+
+As a result, by the above experiment, we can evaluate that the adapted models perform much better than the source-only model.
 
 # transfer-caffe
 
