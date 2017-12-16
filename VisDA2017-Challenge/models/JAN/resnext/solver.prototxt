@@ -1,0 +1,18 @@
+net: "models/JAN/resnext/SE-ResNeXt-50.prototxt"
+test_iter: 400
+test_interval: 200
+base_lr: 0.00001
+lr_policy: "multistep"
+stepvalue:2000
+stepvalue:4000
+stepvalue:6000
+gamma: 0.5
+power: 0.75
+display: 100
+max_iter: 10000
+momentum: 0.9
+weight_decay: 0.0001
+snapshot: 500
+snapshot_prefix:"/home/xujinchang/taskcv_model/stage2_renext"
+snapshot_after_train: false
+solver_mode: GPU

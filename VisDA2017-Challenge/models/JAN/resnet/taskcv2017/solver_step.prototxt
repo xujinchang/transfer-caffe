@@ -1,0 +1,16 @@
+net: "models/JAN/resnet/taskcv2017/train_val.prototxt"
+test_iter: 10000
+test_interval: 10000
+base_lr: 0.0005
+lr_policy: "multistep"
+gamma: 0.5
+stepvalue:30000
+stepvalue:60000
+display: 100
+max_iter: 100000
+momentum: 0.9
+weight_decay: 0.0001
+snapshot: 10000
+snapshot_prefix: "model_xu/JAN_res50_step"
+snapshot_after_train: false
+solver_mode: GPU
